@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .wrap {
+            width: 500px;
+            height: 280px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .view {
+            width: 100%;
+        }
+
+        .view img {
+            width: 100%;
+            position: absolute;
+            display: none;
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        .control {
+            width: 120px;
+            height: 45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            left: 50%;
+            bottom: 8px;
+            transform: translate(-50%, 0);
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 60%);
+        }
+
+        .active {
+            background-color: pink !important;
+        }
+
+        .control-btn {
+            width: 30px;
+            height: 70px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            text-align: center;
+            line-height: 70px;
+            z-index: 100;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+
+        .left {
+            left: 0px;
+        }
+
+        .right {
+            right: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="view">
+            <img src="./轮播图/黑暗势力登场.png" alt="" class="show">
+            <img src="./轮播图/天使 1.png" alt="">
+            <img src="./轮播图/别打啦别打啦.png" alt="">
+        </div>
+        <div class="control">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div class="control-RL">
+            <div id="pre" class="control-btn left">《</div>
+            <div id="next" class="control-btn right">》</div>
+        </div>
+    </div>
+
+    <script>
+        /*
+        1.确认效果初始化：html+css  js方式完成初始化
+        2.分析用户行为 ---->给什么元素绑定什么事件
+        3.事件(行为)发生，哪一个html元素 发生css的动态面板
+
+        完成动态交互，可能需要状态  数据，声明变量然后代表内容
+        注意：表示状态变量，计数器，true/false 
+
+        作用域问题：改变变量需要给那些函数使用----->所有使用地方 都能访问到的一个公共的作用域中
+        比那辆污染问题------>分开声明，闭包解决污染问题
+        */
+
+        var control = document.querySelectorAll('.dot')
+        var view = document.querySelectorAll('img')
+
+        var pre = document.querySelector('#pre')
+        var next = document.querySelector('#next')
+
+
+        var nowIns = 0
+
+        for (var i = 0; i < control.length; i++) {
+            (function (i) {
+                control[i].addEventListener('click', function (e) {
+                    clearImg()
+                    clearDot()
+                    view[i].className = 'show'
+                    control[i].className = 'dot active'
+                    nowIns = i
+
+                })
+            })(i)
+        }
+
+        next.addEventListener('click', function () {
+            clearImg();
+            clearDot()
+            nowIns++
+            if (nowIns > view.length - 1) {
+                nowIns = 0
+            }
+            view[nowIns].className = 'show'
+            control[nowIns].className = 'dot active'
+        });
+
+
+        pre.addEventListener('click', function () {
+            clearImg();
+            clearDot()
+            nowIns--
+            if (nowIns < 0) {
+                nowIns = view.length - 1
+            }
+            view[nowIns].className = 'show'
+            control[nowIns].className = 'dot active'
+        });
+
+
+
+
+
+
+        function clearDot() {
+            control.forEach(function (item, index) {
+                control[index].className = 'dot'
+            })
+        }
+
+        function clearImg() {
+            control.forEach(function (item, index) {
+                view[index].className = ''
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

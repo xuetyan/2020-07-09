@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <lable for="用户名">
+            <input type="text">
+        </lable>
+        <label for="密码">
+            <input type="password">
+        </label>
+        <button>提交</button>
+    </form>
+
+    <div>
+        <input type="text" id="ipt">
+        <h1></h1>
+    </div>
+    <div>
+        <input type="checkbox" id="check">change事件
+    </div>
+
+
+    <script>
+        //form input
+        //submit    change
+        var form = document.querySelector('form')
+        form.onsubmit = function (e) {
+            //阻止浏览器默认行为
+            e.preventDefault()
+            console.log(e, '提交')
+            //获取表单输入内容进行提交处理
+            console.log(form[0].value)
+        }
+
+        var btn = document.querySelector('button')
+        btn.onclick = function () {
+            console.log('*-*')
+        }
+
+
+
+        //input事件
+        var ipt = document.querySelector('#ipt')
+        var h1 = document.querySelector('h1')
+
+        // ipt.oninput = function () {
+        //     h1.innerHTML = ipt.value
+        // }
+
+
+        //内容变化并且失去焦点的时候触发
+        ipt.onchange = function (e) {
+            console.log(e.target.value)
+        }
+
+
+        //change事件    当input发生改变触发
+        //可以实时监听input输入框的动态
+        var check = document.querySelector('#check')
+        check.onchange = function (e) {
+            console.log('check变了')
+            console.log(e.target.checked)
+            console.log(e.target)
+            console.log(e)
+        }
+
+
+    </script>
+</body>
+
+</html>

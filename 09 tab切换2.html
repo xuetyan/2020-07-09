@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            transform: translate(-50%, 0);
+        }
+
+        .control {
+            width: 300px;
+            height: 45px;
+            display: flex;
+
+        }
+
+        .item {
+            width: 100px;
+            height: 45px;
+            border: 1px solid pink;
+            text-align: center;
+            line-height: 45px;
+        }
+
+        .content {
+            width: 300px;
+            height: 200px;
+            font-weight: bold;
+
+        }
+
+        .tab {
+            width: 100%;
+            height: 200px;
+            font-size: 30px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .active {
+            background-color: rosybrown;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="control">
+            <div class="item active">选项1</div>
+            <div class="item">选项2</div>
+            <div class="item">选项3</div>
+        </div>
+        <div class="content">
+            <div class="tab show">01号伞兵准备就绪！</div>
+            <div class="tab">02号伞兵准备就绪！</div>
+            <div class="tab">03号伞兵准备就绪！</div>
+        </div>
+    </div>
+
+
+    <script>
+        var control = document.querySelectorAll('.item')
+        control = [...control];
+        var tab = document.querySelectorAll('.tab')
+        tab = [...tab]
+
+
+        control.forEach(function (item, index) {
+            var colName = 'item'
+            var showName = 'tab'
+
+            item.addEventListener('click', function (e) {
+                control.forEach(function (item) {
+                    item.className = colName
+                })
+
+                tab.forEach(function(item,index){
+                    item.className = showName
+                })
+
+                this.className = colName + ' active'
+                tab[index].className = showName + ' show'
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>
